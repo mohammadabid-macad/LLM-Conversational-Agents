@@ -5,8 +5,11 @@ import requests
 import base64
 import sys
 from datetime import datetime
+
+from keys import OPENAI_API_KEY  # Ensure keys.py is properly imported
+
 # Mode
-mode = "openai" # "local" or "openai"
+mode = "local" # "local" or "openai"
 
 # API
 local_client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
@@ -192,7 +195,10 @@ class Tee:
 def open_logs(script_name):
     sys.dont_write_bytecode = True
     current_datetime = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    logs = f"logs/{script_name}_{current_datetime}.txt"
+    log_dir = "C:/Users/Mohammad/OneDrive/IaaC/M3/GenAI/Forked Repo/LLM-Conversational-Agents/logs"
+    logs = os.path.join(log_dir, f"{script_name}_{current_datetime}.txt")
+    if not os.path.exists(log_dir):
+        os.makedirs(log_dir)
     log_file = open(logs, "w")
     sys.stdout = Tee(sys.stdout, log_file)
 
@@ -200,4 +206,6 @@ def close_logs():
     print("Saving logs...")
     sys.stdout.close()
     sys.stdout = sys.__stdout__
+
+
 client, completion_model, vision_model, agent_completion_model, agent_vision_model = api_mode(mode)

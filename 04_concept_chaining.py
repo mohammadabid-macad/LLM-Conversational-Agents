@@ -7,7 +7,7 @@ open_logs("concept_chaining")
 
 # RAG Parameters
 question = "What is the list of building program?"
-embeddings_json= "../LLM-Knowledge-Pool-RAG/knowledge_pool/Competition_brief.json"
+embeddings_json = "C:/Users/Mohammad/OneDrive/IaaC/M3/GenAI/Forked Repo/LLM-Knowledge-Pool-RAG/knowledge_pool/Competition_brief.json"
 num_results = 100
 
 def brainstorm_brief(rag_result: str)-> str:
